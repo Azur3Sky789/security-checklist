@@ -34,7 +34,7 @@
 ## ⚙️ Phase 2: Windows OS Optimization (รีดพลัง CPU/RAM)
 *รันสคริปต์นี้เพื่อปิดเซอร์วิสที่ไม่จำเป็นสำหรับการเทรดทั้งหมด*
 
-- [ ] **รัน Optimization Script:** เปิด **PowerShell (Run as Administrator)** ก๊อปปี้โค้ดด้านล่างนี้ไปวางแล้วกด Enter (อัปเดตสคริปต์แบบซ่อน Error ข้อความสีแดงแล้ว):
+- [ ] **รัน Optimization Script:** เปิด **PowerShell (Run as Administrator)** ก๊อปปี้โค้ดด้านล่างนี้ไปวางแล้วกด Enter:
 
     ```powershell
     # 1. ปิดบริการที่ไม่จำเป็นสำหรับ VPS เทรด (คืน RAM/CPU)
