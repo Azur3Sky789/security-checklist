@@ -4,17 +4,18 @@
 
 ---
 
-## 🛡️ Phase 1: Network & Security (สร้าง Dark Server)
-*ทำเป็นอย่างแรกเพื่อป้องกันการถูกแฮกและลด Latency ของเครือข่าย*
+## 🛡️ Phase 1: Network & Security (Hardening & Stealth Mode)
+*เน้นการซ่อนตัวตน ป้องกันการถูก Port Scan จากภายนอก และลด Latency ของเครือข่าย*
 
-- [ ] **ติดตั้ง Tailscale:** โหลดและติดตั้ง Tailscale เพื่อสร้างท่อ VPN ส่วนตัว
-- [ ] **ปิดประตูหน้าบ้าน (RDP Firewall):**
+- [ ] **ติดตั้ง Tailscale:** โหลดและติดตั้ง Tailscale เพื่อสร้างท่อ VPN ส่วนตัว (Mesh Network)
+- [ ] **ปิดพอร์ตสาธารณะเพื่อป้องกัน Port Scan (RDP Firewall):**
     1. เปิด `Windows Defender Firewall with Advanced Security`
+    
     2. ไปที่ **Inbound Rules** > หา Rule ชื่อ `Remote Desktop - User Mode (TCP-In)`
     3. ดับเบิลคลิกไปที่แท็บ **Scope** > ตรง Remote IP address เลือก *These IP addresses*
-    4. กด **Add** แล้วใส่ `IP Tailscale ประจำเครื่องของคุณ` (เช่น `100.100.xxx.xxx`) 
-       *(วิธีหา IP: เปิดโปรแกรม Tailscale ที่คอมพิวเตอร์ของคุณ แล้วคลิกที่ชื่อเครื่องเพื่อ Copy IP)*
-    5. กด Apply (การตั้งค่านี้จะบล็อกคนทั้งโลก และอนุญาตแค่เครื่องของคุณเครื่องเดียวเท่านั้น)
+    4. กด **Add** แล้วใส่ `IP Tailscale ของเครื่องคอมพิวเตอร์เรา` (เช่น `100.x.x.x`)
+       *(วิธีหา IP: คลิกที่ไอคอน Tailscale ใน Taskbar ของเครื่องเรา แล้ว Copy IP มาใส่)*
+    5. กด Apply (การทำแบบนี้จะทำให้ VPS ไม่ตอบสนองต่อการสแกนพอร์ตจาก Public IP ใดๆ ทั้งสิ้น)
 - [ ] **ปลดล็อกคอขวด Network (TCP Tuning):** เปิด **PowerShell (Run as Administrator)** แล้วรัน 3 คำสั่งนี้ทีละบรรทัด:
 
     ```powershell
