@@ -8,9 +8,12 @@
 *เน้นการซ่อนตัวตน ป้องกันการถูก Port Scan จากภายนอก และลด Latency ของเครือข่าย*
 
 - [ ] **ติดตั้ง Tailscale:** โหลดและติดตั้ง Tailscale เพื่อสร้างท่อ VPN ส่วนตัว (Mesh Network)
+    1. โหลดและติดตั้ง Tailscale ล็อกอินให้เรียบร้อย
+    2. คลิกขวาที่ไอคอน Tailscale ตรงมุมขวาล่างของจอ (Taskbar)
+    3. ไปที่ Preferences > ติ๊กถูกที่ Run unattended (เพื่อให้ Tailscale เปิดทันทีตอนบูตโดยไม่ต้องรอ Login)
+    4. เข้าเว็บ admin.tailscale.com ไปที่แท็บ Machines > หาชื่อ VPS > กดจุด 3 จุดขวาสุด > เลือก Disable key expiry
 - [ ] **ปิดพอร์ตสาธารณะเพื่อป้องกัน Port Scan (RDP Firewall):**
     1. เปิด `Windows Defender Firewall with Advanced Security`
-    
     2. ไปที่ **Inbound Rules** > หา Rule ชื่อ `Remote Desktop - User Mode (TCP-In)`
     3. ดับเบิลคลิกไปที่แท็บ **Scope** > ตรง Remote IP address เลือก *These IP addresses*
     4. กด **Add** แล้วใส่ `IP Tailscale ของเครื่องคอมพิวเตอร์เรา` (เช่น `100.x.x.x`)
