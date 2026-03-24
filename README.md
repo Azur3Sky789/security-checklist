@@ -105,6 +105,30 @@
 - [ ] **ตั้งโปรแกรมให้เปิดเอง (Startup):**
     1. กด `Win + R` พิมพ์ `shell:startup` แล้ว Enter
     2. สร้าง Shortcut ของ MT4/MT5 มาวางไว้ในโฟลเดอร์นี้
+- [ ] ตั้งค่า Auto Clear RAM (สคริปต์คืนพื้นที่หน่วยความจำอัตโนมัติ): เปิด PowerShell (Run as Administrator) แล้วรันคำสั่งด้านล่างนี้ (คำสั่งนี้จะสร้างไฟล์ C:\ClearRAM.ps1 และตั้ง Task ให้รันแบบซ่อนหน้าต่างทุกๆ 1 ชั่วโมงโดยอัตโนมัติด้วยสิทธิ์ SYSTEM):
+
+    ```powershell
+    # 1. สร้างไฟล์สคริปต์ ClearRAM.ps1 ที่ไดรฟ์ C:\
+    $ScriptContent = @'
+    # สคริปต์คืนพื้นที่ RAM (Clear Working Set) ให้กับ VPS
+    Get-Process | Where-Object {$_.Name -notmatch "System|Idle|csrss|smss"} | ForEach-Object {
+        try {
+            [System.GC]::Collect()
+            [System.GC]::WaitForPendingFinalizers()
+            $_.MaxWorkingSet = [IntPtr]((Get-Process -Id $_.Id).MaxWorkingSet)
+        } catch {}
+    }
+    '@
+    Set-Content -Path "C:\ClearRAM.ps1" -Value $ScriptContent -Encoding UTF8
+    
+    # 2. สร้าง Scheduled Task ให้รันทุกๆ 1 ชั่วโมง (ซ่อนหน้าต่าง & สิทธิ์สูงสุด)
+    $Action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-ExecutionPolicy Bypass -WindowStyle Hidden -File C:\ClearRAM.ps1"
+    $Trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(1) -RepetitionInterval (New-TimeSpan -Hours 1)
+    $Principal = New-ScheduledTaskPrincipal -UserId "SYSTEM" -LogonType ServiceAccount -RunLevel Highest
+    Register-ScheduledTask -TaskName "AutoClearRAM" -Action $Action -Trigger $Trigger -Principal $Principal -Force
+    
+    Write-Host "Auto Clear RAM Task Scheduled Successfully! It will run every 1 hour." -ForegroundColor Green
+    ```
 
 ---
 
