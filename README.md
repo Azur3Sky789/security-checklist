@@ -103,7 +103,7 @@
     2. เอาติ๊กถูกตรง *"Users must enter a user name and password..."* ออก
     3. ใส่รหัสผ่าน Administrator ยืนยัน (ระวัง: ทำขั้นตอนนี้หลังจากลง Tailscale และบล็อกพอร์ตแล้วเท่านั้น)
 - [ ] **ตั้งโปรแกรมให้เปิดเอง (Startup):**
-    1. กด `Win + R` พิมพ์ `shell:startup` แล้ว Enter
+    1. กด `Win + R` พิมพ์ `shell:startup` แล้ว Enter (C:\Users\$USER\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup)
     2. สร้าง Shortcut ของ MT4/MT5 มาวางไว้ในโฟลเดอร์นี้
 - [ ] ตั้งค่า Auto Clear RAM (สคริปต์คืนพื้นที่หน่วยความจำอัตโนมัติ): เปิด PowerShell (Run as Administrator) แล้วรันคำสั่งด้านล่างนี้ (คำสั่งนี้จะสร้างไฟล์ C:\ClearRAM.ps1 และตั้ง Task ให้รันแบบซ่อนหน้าต่างทุกๆ 1 ชั่วโมงโดยอัตโนมัติด้วยสิทธิ์ SYSTEM):
 
